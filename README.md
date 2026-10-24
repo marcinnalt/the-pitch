@@ -2,6 +2,12 @@
 
 **AI for kids — stories, lessons and quests that run on your own device.**
 
+![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2026-FF5A36?style=flat-square&labelColor=14110F)
+![Gemma 4](https://img.shields.io/badge/Gemma-4-FFD22E?style=flat-square&labelColor=14110F)
+![AI for kids](https://img.shields.io/badge/AI_for_kids-ages_4–10-7CC7FF?style=flat-square&labelColor=14110F)
+![Open source](https://img.shields.io/badge/Open_source-yes-8FE3AE?style=flat-square&labelColor=14110F)
+![Runs locally](https://img.shields.io/badge/Runs-locally-FFFDF3?style=flat-square&labelColor=14110F)
+
 StorySpark Local is a story and learning world for kids aged 4–10. A child draws a hero with a
 finger or a mouse, picks a lesson such as kindness, courage or sharing, and gets a short illustrated
 adventure in which their own drawing is the main character. The story pauses at real choices, the
