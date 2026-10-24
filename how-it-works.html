@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How StorySpark Works — crayon in, adventure out</title>
+  <meta name="description" content="See how StorySpark Local turns a child's drawing and voice into a safety-checked, playable story chapter — and how the Gemini 4 story engine keeps every lesson age-appropriate.">
+  <meta name="theme-color" content="#FFD22E">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+        </span>
+        <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
+        <span class="sr-only">Menu</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+
+      <nav class="nav-panel" id="nav-panel" aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="what-it-does.html">What it does</a></li>
+          <li><a href="how-it-works.html" aria-current="page">How it works</a></li>
+          <li><a href="grown-ups.html">Grown-ups</a></li>
+        </ul>
+        <a class="btn btn--yellow btn--sm" href="play.html">Start a story</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span>How it works</span>
+        </nav>
+        <p class="kicker">From paper to play</p>
+        <h1 class="display">Crayon in.<br>Adventure out.</h1>
+        <p class="lede">A drawing, a spoken idea, and one tap. That's the entire input. Underneath, four steps turn it into a playable, safety-checked chapter — in about the time it takes to sharpen a pencil.</p>
+        <div class="page-hero-meta">
+          <span class="tag tag--yellow">4-step pipeline</span>
+          <span class="tag">Voice first</span>
+          <span class="tag">Checked before it plays</span>
+          <span class="tag">Printable ending</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">The pipeline</p>
+            <h2 class="display">Look. Listen.<br>Think. Play.</h2>
+            <p class="lede">Every chapter runs through the same four stages. The kid only ever sees the last one — a story that knows their drawing by name.</p>
+          </div>
+        </div>
+
+        <div class="pipeline">
+          <article class="pipe">
+            <span class="pipe-num">01</span>
+            <h3>Look</h3>
+            <p>A photo of the drawing goes in. The vision model picks out the character: shape, colour, mood, the extra leg nobody mentioned.</p>
+            <code>vision · ~500 tokens</code>
+          </article>
+          <article class="pipe pipe--yellow">
+            <span class="pipe-num">02</span>
+            <h3>Listen</h3>
+            <p>Your kid says what happens. Speech becomes text on the device, so nobody has to type or read a single word.</p>
+            <code>speech-to-text · local</code>
+          </article>
+          <article class="pipe">
+            <span class="pipe-num">03</span>
+            <h3>Think</h3>
+            <p>Gemini 4 writes the next short chapter, then reviews it in thinking mode against the child-safety brief before a word is spoken.</p>
+            <code>gemini 4 · guardrail</code>
+          </article>
+          <article class="pipe pipe--yellow">
+            <span class="pipe-num">04</span>
+            <h3>Play</h3>
+            <p>Narration, two clear choices, and the next beat. At the end: a printable colouring page and one question for the table.</p>
+            <code>narration · print</code>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inside the engine -->
+    <section class="section section--milk rule-top">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">Inside the story engine</p>
+            <h2 class="display">Six small machines.<br>One very big imagination.</h2>
+            <p class="lede">The technical bits, for the grown-ups who like to know what's under the hood. None of it is visible to a four-year-old, which is exactly the point.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path d="M18 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></svg>
+            </span>
+            <h3>The story brain</h3>
+            <p>Holds the world, the lesson and your kid's drawing in mind, then writes one short chapter at a time — never the whole book.</p>
+            <span class="feat-tech">Gemini 4 · thinking mode</span>
+          </article>
+
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+            </span>
+            <h3>Drawing eyes</h3>
+            <p>Reads crayon characters as they are — a blob, a dragon, a cat in a hat — without needing a perfect photo or a tidy background.</p>
+            <span class="feat-tech">Vision encoder</span>
+          </article>
+
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+            </span>
+            <h3>The safety pass</h3>
+            <p>A second reasoning pass checks each chapter for kindness, age-fit and scare-factor. If it fails, the chapter is rewritten before it plays.</p>
+            <span class="feat-tech">Guardrail · child-safety brief</span>
+          </article>
+
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4"/></svg>
+            </span>
+            <h3>Voice in, voice out</h3>
+            <p>Speech-to-text and narration run on the device. Pre-readers never touch a keyboard, and the story talks back in a warm, unhurried voice.</p>
+            <span class="feat-tech">Whisper + Piper · local</span>
+          </article>
+
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h6v5H5zM13 6h6v5h-6zM5 13h6v5H5zM13 13h6v5h-6z"/></svg>
+            </span>
+            <h3>Choices that remember</h3>
+            <p>Each pick updates the world state: who's a friend now, what's in the bag, how the hero feels. Chapter three knows what happened in chapter one.</p>
+            <span class="feat-tech">Branch memory · story state</span>
+          </article>
+
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#14110F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="7" rx="0"/><path d="M7 16h10v4H7z"/><path d="M17 12h3v4h-3"/></svg>
+            </span>
+            <h3>The fridge-door ending</h3>
+            <p>Every adventure finishes with a printable colouring page of your kid's own character and one question to talk about at dinner.</p>
+            <span class="feat-tech">SVG export · print</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interruption-friendly -->
+    <section class="section">
+      <div class="wrap band-split">
+        <div>
+          <p class="kicker">Built for real life</p>
+          <h2 class="display">Made to be<br>interrupted.</h2>
+          <p class="lede">Small kids don't do forty-minute sessions. They do four minutes, a snack, a wobble, and then maybe some more. StorySpark is shaped around that.</p>
+          <ul class="check-list" style="margin-top: 26px;">
+            <li class="check-item">
+              <span class="check-mark" aria-hidden="true">✓</span>
+              <div>
+                <h3>Chapters, not marathons</h3>
+                <p>Each beat is 2–3 minutes. There's always a clean place to stop, and “the end” is never far away.</p>
+              </div>
+            </li>
+            <li class="check-item">
+              <span class="check-mark" aria-hidden="true">✓</span>
+              <div>
+                <h3>Pick up where you left off</h3>
+                <p>The story remembers the drawing, the choices and the lesson. Come back after lunch and keep going.</p>
+              </div>
+            </li>
+            <li class="check-item">
+              <span class="check-mark" aria-hidden="true">✓</span>
+              <div>
+                <h3>Replay is the feature</h3>
+                <p>Same world, different choice, different ending. Replaying is how kids test the lesson from the other side.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="kicker">The short spec</p>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>Ages</dt><dd>4–10, with age-banded language and story length</dd></div>
+            <div class="spec-row"><dt>Session</dt><dd>7–20 minutes, ending on a calm “the end”</dd></div>
+            <div class="spec-row"><dt>Reading</dt><dd>None required — everything is spoken and pictured</dd></div>
+            <div class="spec-row"><dt>Kid accounts</dt><dd>None. A grown-up starts the session</dd></div>
+            <div class="spec-row"><dt>Controls</dt><dd>A drawing, a voice, and one finger</dd></div>
+            <div class="spec-row"><dt>Runs on</dt><dd>A tablet or laptop on the kitchen table</dd></div>
+            <div class="spec-row"><dt>Story engine</dt><dd>Gemini 4, with a child-safety reasoning pass</dd></div>
+            <div class="spec-row"><dt>Ends with</dt><dd>Audio narration, a colouring page, one question</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="wrap">
+        <p class="kicker">Enough theory</p>
+        <h2 class="display">Go draw something weird.</h2>
+        <p>The playable preview lets you sketch a character, choose a lesson and make the first call. No account, no install.</p>
+        <div class="hero-actions">
+          <a class="btn btn--ink" href="play.html">Open the studio <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="grown-ups.html">Read about safety</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-about">
+          <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+            </span>
+            <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+          </a>
+          <p>A story world where kids draw the hero, say the idea and choose the lesson. Made for ages 4–10.</p>
+          <span class="footer-note">Concept pitch · demo content</span>
+        </div>
+
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="what-it-does.html">What it does</a></li>
+            <li><a href="what-it-does.html#library">Lesson library</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="play.html">Start a story</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Grown-ups</h3>
+          <ul>
+            <li><a href="grown-ups.html">Safety &amp; privacy</a></li>
+            <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
+            <li><a href="grown-ups.html#educators">Educator kit</a></li>
+            <li><a href="grown-ups.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Small print</h3>
+          <ul>
+            <li>Made for ages 4–10</li>
+            <li>No ads. Ever.</li>
+            <li>Powered by Gemini 4</li>
+            <li>Runs on your home setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-word" aria-hidden="true">STORYSPARK</div>
+
+      <div class="footer-bottom">
+        <span>© 2026 StorySpark Local. Made for small humans.</span>
+        <span>Draw boldly. Choose kindly. The end.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

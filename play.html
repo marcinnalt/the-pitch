@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start a Story — the StorySpark studio preview</title>
+  <meta name="description" content="Draw a character, name them, pick a lesson and make the first choice in the StorySpark Local studio preview.">
+  <meta name="theme-color" content="#FFD22E">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+        </span>
+        <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
+        <span class="sr-only">Menu</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+
+      <nav class="nav-panel" id="nav-panel" aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="what-it-does.html">What it does</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="grown-ups.html">Grown-ups</a></li>
+        </ul>
+        <a class="btn btn--yellow btn--sm" href="play.html" aria-current="page">Start a story</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span>Studio</span>
+        </nav>
+        <p class="kicker">Playable preview</p>
+        <h1 class="display">Make a story in three<br>crayon-simple steps.</h1>
+        <p class="lede">Sketch a hero, give them a name, pick the lesson. This preview uses a scripted story so you can feel the shape of an adventure — the full app generates each chapter from the drawing with the Gemini 4 engine.</p>
+        <div class="page-hero-meta">
+          <span class="tag tag--yellow">1 · Draw</span>
+          <span class="tag">2 · Name &amp; lesson</span>
+          <span class="tag">3 · Choose the first move</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Studio -->
+    <section class="section" id="studio">
+      <div class="wrap">
+        <div class="studio">
+          <!-- Step 1: draw -->
+          <section class="panel" aria-labelledby="draw-heading">
+            <div class="panel-head">
+              <h2 id="draw-heading" style="font: inherit; letter-spacing: inherit;"><span data-i18n="step1">Step 1 · Draw your hero</span></h2>
+              <span data-i18n="pointer">Use a finger or mouse</span>
+            </div>
+            <div class="panel-body">
+              <div class="canvas-frame">
+                <canvas data-canvas width="960" height="620" aria-label="Drawing pad. Draw your character here with a finger or mouse.">
+                  A drawing pad where you can sketch your character.
+                </canvas>
+                <div class="canvas-empty" data-canvas-empty aria-hidden="true">
+                  <strong data-i18n="drawHere">Draw your hero here</strong>
+                  <span data-i18n="blob">a blob counts</span>
+                </div>
+                <span class="canvas-stamp" data-i18n="paper">Your paper · keep it weird</span>
+              </div>
+
+              <div class="tools">
+                <div class="swatches" role="group" aria-label="Crayon colour">
+                  <button class="swatch" type="button" data-color="#14110f" data-eraser="false" aria-pressed="true" aria-label="Ink black" style="background:#14110f;"></button>
+                  <button class="swatch" type="button" data-color="#ff5a36" data-eraser="false" aria-pressed="false" aria-label="Tomato red" style="background:#ff5a36;"></button>
+                  <button class="swatch" type="button" data-color="#ffd22e" data-eraser="false" aria-pressed="false" aria-label="Sunny yellow" style="background:#ffd22e;"></button>
+                  <button class="swatch" type="button" data-color="#7cc7ff" data-eraser="false" aria-pressed="false" aria-label="Sky blue" style="background:#7cc7ff;"></button>
+                  <button class="swatch" type="button" data-color="#8fe3ae" data-eraser="false" aria-pressed="false" aria-label="Mint green" style="background:#8fe3ae;"></button>
+                  <button class="swatch swatch--eraser" type="button" data-color="#fffdf3" data-eraser="true" aria-pressed="false" aria-label="Eraser"><span data-i18n="erase">Erase</span></button>
+                </div>
+                <button class="tool-btn" type="button" data-clear><span data-i18n="clear">Clear paper</span></button>
+              </div>
+
+              <p class="studio-hint" style="margin-top:14px;">No wrong drawings. A blob, a dragon, a cat in a hat — all welcome. You can also just pick a name and play without drawing.</p>
+            </div>
+          </section>
+
+          <!-- Steps 2 & 3 -->
+          <section class="panel" aria-labelledby="setup-heading">
+            <div class="panel-head">
+              <h2 id="setup-heading" style="font: inherit; letter-spacing: inherit;"><span data-i18n="step2">Steps 2 &amp; 3 · Set the story</span></h2>
+              <span>Tap to choose</span>
+            </div>
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="field-label"><span data-i18n="who" style="letter-spacing:.12em;opacity:1;text-transform:uppercase;font-weight:700;">Who is the hero?</span><span data-i18n="pickName">pick a name</span></div>
+                <label class="sr-only" for="hero-name">Hero name</label>
+                <input class="name-input" id="hero-name" type="text" data-name-input maxlength="24" value="Pip" autocomplete="off" spellcheck="false">
+                <div class="chip-row" role="group" aria-label="Hero name">
+                  <button class="chip" type="button" data-name="Pip" aria-pressed="true">Pip</button>
+                  <button class="chip" type="button" data-name="Nori" aria-pressed="false">Nori</button>
+                  <button class="chip" type="button" data-name="Bo" aria-pressed="false">Bo</button>
+                  <button class="chip" type="button" data-name="Ziggy" aria-pressed="false">Ziggy</button>
+                  <button class="chip" type="button" data-name="Mango" aria-pressed="false">Mango</button>
+                  <button class="chip" type="button" data-name="Luna" aria-pressed="false">Luna</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field-label"><span data-i18n="practice" style="letter-spacing:.12em;opacity:1;text-transform:uppercase;font-weight:700;">What should they practise?</span><span data-i18n="pickLesson">pick a lesson</span></div>
+                <div class="chip-row" role="group" aria-label="Lesson">
+                  <button class="chip" type="button" data-lesson="kindness" aria-pressed="true">Kindness</button>
+                  <button class="chip" type="button" data-lesson="courage" aria-pressed="false">Courage</button>
+                  <button class="chip" type="button" data-lesson="sharing" aria-pressed="false">Sharing</button>
+                  <button class="chip" type="button" data-lesson="honesty" aria-pressed="false">Honesty</button>
+                  <button class="chip" type="button" data-lesson="patience" aria-pressed="false">Patience</button>
+                  <button class="chip" type="button" data-lesson="curiosity" aria-pressed="false">Curiosity</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field-label">
+                  <span data-i18n="language" style="letter-spacing:.12em;opacity:1;text-transform:uppercase;font-weight:700;">Story language</span>
+                  <span>4 languages</span>
+                </div>
+                <select class="language-select" data-language-select aria-label="Story language">
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="ar">العربية</option>
+                </select>
+              </div>
+
+              <div class="studio-action">
+                <button class="btn btn--yellow btn--block" type="button" data-generate><span data-i18n="tell">Tell my story</span> <span class="btn-arrow" aria-hidden="true">→</span></button>
+                <p class="studio-hint" data-generate-hint data-i18n="hint">StorySpark will look at your drawing, then start a chapter with three real choices.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section class="section section--tight" data-result hidden id="your-story" aria-live="polite">
+      <div class="wrap">
+        <div class="result-card">
+          <div class="result-art">
+            <div class="result-art-frame">
+              <img data-result-image alt="The character you drew, shown beside the story" hidden>
+              <div class="art-placeholder" data-result-placeholder>Your drawing will appear here.</div>
+            </div>
+            <div class="tag-row">
+              <span class="tag tag--yellow" data-result-name>Pip</span>
+              <span class="tag">Your drawing</span>
+              <span class="tag">Chapter 1</span>
+            </div>
+          </div>
+
+          <div class="result-story">
+            <span class="tag tag--yellow" data-result-chapter style="align-self:flex-start;">Chapter 1 · Kindness</span>
+            <h2 data-result-title>The Lost Firefly</h2>
+            <p class="result-text" data-result-text></p>
+
+            <div class="demo-choices" data-result-choices></div>
+
+            <div class="result-lesson" data-result-lesson hidden>
+              <b data-i18n="lessonUnder">The lesson underneath</b>
+              <span data-result-lesson-text></span>
+            </div>
+
+            <div class="result-tools">
+              <button class="btn btn--sm" type="button" data-result-save><span data-i18n="save">Save coloring page</span></button>
+              <button class="text-btn" type="button" data-result-restart><span data-i18n="restart">Start a new story</span> ↺</button>
+            </div>
+
+            <p class="studio-hint" data-i18n="previewNote">Preview story — the full app writes this from your drawing with the Gemini 4 engine.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-about">
+          <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+            </span>
+            <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+          </a>
+          <p>A story world where kids draw the hero, say the idea and choose the lesson. Made for ages 4–10.</p>
+          <span class="footer-note">Concept pitch · demo content</span>
+        </div>
+
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="what-it-does.html">What it does</a></li>
+            <li><a href="what-it-does.html#library">Lesson library</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="play.html">Start a story</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Grown-ups</h3>
+          <ul>
+            <li><a href="grown-ups.html">Safety &amp; privacy</a></li>
+            <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
+            <li><a href="grown-ups.html#educators">Educator kit</a></li>
+            <li><a href="grown-ups.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Small print</h3>
+          <ul>
+            <li>Made for ages 4–10</li>
+            <li>No ads. Ever.</li>
+            <li>Powered by Gemini 4</li>
+            <li>Runs on your home setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-word" aria-hidden="true">STORYSPARK</div>
+
+      <div class="footer-bottom">
+        <span>© 2026 StorySpark Local. Made for small humans.</span>
+        <span>Draw boldly. Choose kindly. The end.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/store.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script>
+    /* Point this at a local StorySpark backend to use a real model.
+       Leave it empty for the self-contained scripted preview. */
+    window.STORYSPARK_API = "";
+  </script>
+  <script src="assets/js/play.js" defer></script>
+</body>
+</html>

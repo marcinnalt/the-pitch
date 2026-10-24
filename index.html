@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StorySpark Local — Draw a friend. Learn a lesson. Play the story.</title>
+  <meta name="description" content="StorySpark Local turns kids' crayon doodles and spoken ideas into short, branchable story adventures that teach kindness, courage, patience and more. For ages 4–10.">
+  <meta name="theme-color" content="#FFD22E">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+        </span>
+        <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
+        <span class="sr-only">Menu</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+
+      <nav class="nav-panel" id="nav-panel" aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="what-it-does.html">What it does</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="grown-ups.html">Grown-ups</a></li>
+        </ul>
+        <a class="btn btn--yellow btn--sm" href="play.html">Start a story</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span>Ages 4–10 · no reading required</p>
+          <h1 class="display">Draw a friend.<br>Learn a <span class="marker">lesson</span>.<br>Play the story.</h1>
+          <p class="lede">StorySpark turns crayon doodles and big spoken ideas into short, branchable adventures. Your kid picks what happens next — and walks away with a lesson about kindness, courage or patience they actually felt.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn--yellow" href="play.html">Start a story <span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a class="btn" href="what-it-does.html">See the 12 lessons</a>
+          </div>
+
+          <p class="hero-note">
+            <span>Built on Gemini 4</span>
+            <span>No accounts for kids</span>
+            <span>Made for small hands</span>
+          </p>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-card">
+            <div class="sticker sticker--age">Ages 4–10</div>
+            <div class="art-top">
+              <span>Pip's big question</span>
+            </div>
+            <div class="art-canvas">
+              <svg class="pip" viewBox="0 0 260 240" role="img" aria-label="A doodled yellow creature called Pip">
+                <g stroke="#14110F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M132 46 L120 24" fill="none"/>
+                  <path d="M120 24 l-9 -7 M120 24 l1 -11 M120 24 l11 -6" fill="none" stroke-width="4"/>
+                  <path d="M130 44 C 78 44 50 82 52 128 C 54 182 88 210 130 210 C 172 210 206 182 208 128 C 210 82 182 44 130 44 Z" fill="#FFD22E"/>
+                  <path d="M54 132 C 34 128 30 148 44 158" fill="#FFD22E"/>
+                  <path d="M206 132 C 226 128 230 148 216 158" fill="#FFD22E"/>
+                  <path d="M96 208 C 88 226 110 230 118 216" fill="#FFD22E"/>
+                  <path d="M164 208 C 172 226 150 230 142 216" fill="#FFD22E"/>
+                  <circle cx="106" cy="118" r="7" fill="#14110F"/>
+                  <circle cx="156" cy="118" r="7" fill="#14110F"/>
+                  <circle cx="88" cy="142" r="8" fill="#FF5A36" stroke="none" opacity=".8"/>
+                  <circle cx="174" cy="142" r="8" fill="#FF5A36" stroke="none" opacity=".8"/>
+                  <path d="M112 146 Q130 164 148 146" fill="none"/>
+                  <circle cx="78" cy="172" r="5" fill="#14110F" stroke="none" opacity=".45"/>
+                  <circle cx="184" cy="168" r="4" fill="#14110F" stroke="none" opacity=".45"/>
+                  <circle cx="130" cy="188" r="4" fill="#14110F" stroke="none" opacity=".45"/>
+                </g>
+                <g stroke="#14110F" stroke-width="4" stroke-linecap="round" fill="none">
+                  <path d="M34 64 l0 16 M26 72 l16 0"/>
+                  <path d="M230 86 l0 12 M224 92 l12 0"/>
+                  <path d="M212 34 l0 8 M208 38 l8 0"/>
+                </g>
+              </svg>
+            </div>
+            <div class="art-audio">
+              <span class="play-dot">
+                <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>
+              </span>
+              <span class="wave">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </span>
+              <span class="audio-time">Listen · 0:24</span>
+            </div>
+            <div class="art-choices">
+              <span class="choice">Follow the firefly <span class="choice-arrow">→</span></span>
+              <span class="choice">Ask the snail for directions <span class="choice-arrow">→</span></span>
+            </div>
+            <div class="sticker sticker--lesson">Lesson: kindness</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span>Kindness</span><span class="ticker-star">✳</span>
+          <span>Courage</span><span class="ticker-star">✳</span>
+          <span>Patience</span><span class="ticker-star">✳</span>
+          <span>Sharing</span><span class="ticker-star">✳</span>
+          <span>Honesty</span><span class="ticker-star">✳</span>
+          <span>Curiosity</span><span class="ticker-star">✳</span>
+          <span>Empathy</span><span class="ticker-star">✳</span>
+          <span>Teamwork</span><span class="ticker-star">✳</span>
+          <span>No reading required</span><span class="ticker-star">✳</span>
+          <span>No ads. Ever.</span><span class="ticker-star">✳</span>
+          <span>20-minute adventures</span><span class="ticker-star">✳</span>
+        </div>
+        <div class="ticker-group">
+          <span>Kindness</span><span class="ticker-star">✳</span>
+          <span>Courage</span><span class="ticker-star">✳</span>
+          <span>Patience</span><span class="ticker-star">✳</span>
+          <span>Sharing</span><span class="ticker-star">✳</span>
+          <span>Honesty</span><span class="ticker-star">✳</span>
+          <span>Curiosity</span><span class="ticker-star">✳</span>
+          <span>Empathy</span><span class="ticker-star">✳</span>
+          <span>Teamwork</span><span class="ticker-star">✳</span>
+          <span>No reading required</span><span class="ticker-star">✳</span>
+          <span>No ads. Ever.</span><span class="ticker-star">✳</span>
+          <span>20-minute adventures</span><span class="ticker-star">✳</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lessons -->
+    <section class="section" id="lessons">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">The lesson library</p>
+            <h2 class="display">Stories they play.<br>Lessons they keep.</h2>
+            <p class="lede">Every StorySpark adventure is built around one small, useful idea — the kind you can practise on a Tuesday afternoon. Your kid never gets a lecture. They get a choice.</p>
+          </div>
+          <div class="section-head__aside">
+            <a class="btn" href="what-it-does.html">All 12 lessons <span class="btn-arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 40S9 31.5 9 21.8A7.8 7.8 0 0 1 24 18a7.8 7.8 0 0 1 15 3.8C39 31.5 24 40 24 40Z" fill="#FFD22E" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M6 13l2-4 2 4 4 2-4 2-2 4-2-4-4-2z" fill="#14110F"/></svg>
+              </span>
+              <span class="lesson-num">01</span>
+            </div>
+            <h3>Kindness</h3>
+            <p>The Lost Firefly: a tiny light needs help getting home, and the whole garden is watching.</p>
+            <div class="tag-row"><span class="tag">Ages 4–6</span><span class="tag">8 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“Who did you help today without being asked?”</p>
+          </article>
+
+          <article class="lesson lesson--yellow">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 5l15 5.4v11.8c0 9.6-6.7 16.2-15 20.8-8.3-4.6-15-11.2-15-20.8V10.4L24 5Z" fill="#FFEAA6" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M16.5 24.5l5.5 5.5 10-11" stroke="#14110F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="lesson-num">02</span>
+            </div>
+            <h3>Courage</h3>
+            <p>The Very Small Knight: the castle is enormous, the knight is teacup-sized, and something is snoring.</p>
+            <div class="tag-row"><span class="tag">Ages 5–7</span><span class="tag">10 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“What's something brave you did that nobody saw?”</p>
+          </article>
+
+          <article class="lesson">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><circle cx="18" cy="19" r="8" fill="#FFFFFF" stroke="#14110F" stroke-width="3"/><circle cx="30" cy="19" r="8" fill="#FFD22E" stroke="#14110F" stroke-width="3"/><path d="M14 25h20L24 43 14 25Z" fill="#FFD22E" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M19 31l5 5 5-5" stroke="#14110F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="lesson-num">03</span>
+            </div>
+            <h3>Sharing</h3>
+            <p>Two Scoops, One Cone: one ice cream, two hungry friends, and a melting clock.</p>
+            <div class="tag-row"><span class="tag">Ages 4–6</span><span class="tag">7 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“When is sharing easy? When is it hard?”</p>
+          </article>
+
+          <article class="lesson">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M31 7l10 10L20 38l-13 3 3-13L31 7Z" fill="#FFD22E" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M27 11l10 10M9 38l6-6" stroke="#14110F" stroke-width="3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="lesson-num">04</span>
+            </div>
+            <h3>Honesty</h3>
+            <p>The Missing Crayon: the red one is gone, everyone has a theory, and somebody knows more.</p>
+            <div class="tag-row"><span class="tag">Ages 5–7</span><span class="tag">9 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“Is it ever kinder to say nothing? Hmm.”</p>
+          </article>
+
+          <article class="lesson lesson--yellow">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 42V23" stroke="#14110F" stroke-width="3.2" stroke-linecap="round"/><path d="M24 28c-9 0-14-5-14-12 8 0 14 4 14 12Z" fill="#8FE3AE" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M24 22c0-8 6-12 14-12 0 7-6 12-14 12Z" fill="#FFD22E" stroke="#14110F" stroke-width="3" stroke-linejoin="round"/><path d="M12 42h24" stroke="#14110F" stroke-width="3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="lesson-num">05</span>
+            </div>
+            <h3>Patience</h3>
+            <p>The Seed That Took Its Time: everyone else's garden is blooming. Yours is doing… something.</p>
+            <div class="tag-row"><span class="tag">Ages 4–6</span><span class="tag">8 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“What's something good that took a long time?”</p>
+          </article>
+
+          <article class="lesson">
+            <div class="lesson-top">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><circle cx="21" cy="21" r="12" fill="#FFEAA6" stroke="#14110F" stroke-width="3.2"/><path d="M30 30l10 10" stroke="#14110F" stroke-width="5" stroke-linecap="round"/><path d="M17 17c1-2.4 3.2-3.4 6-3.4" stroke="#14110F" stroke-width="2.6" stroke-linecap="round"/></svg>
+              </span>
+              <span class="lesson-num">06</span>
+            </div>
+            <h3>Curiosity</h3>
+            <p>What's Under the Rock? Something small, something wiggly, and a very good question.</p>
+            <div class="tag-row"><span class="tag">Ages 6–8</span><span class="tag">9 min</span></div>
+            <p class="talk"><b>Ask at dinner</b>“What did you wonder about today?”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section--milk rule-top" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">How it works</p>
+            <h2 class="display">Three moves.<br>That's the whole interface.</h2>
+            <p class="lede">No menus to learn, no keyboard, no reading. A four-year-old can run the entire thing with a crayon, a voice and one finger.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Draw a character</h3>
+            <p>Any creature counts. A blob with legs, a dinosaur in a hat, a very round cat. Hold it up to the camera and StorySpark meets them.</p>
+            <span class="step-note">Crayon · paper · 20 seconds</span>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Say what happens</h3>
+            <p>“They're scared of the dark!” “She wants a sandwich!” Kids talk, StorySpark listens, and the story starts moving in their direction.</p>
+            <span class="step-note">Talk or tap · no typing</span>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Choose the next move</h3>
+            <p>Two clear choices, read aloud. Whatever they pick, the lesson comes along for the ride — and the next chapter remembers it.</p>
+            <span class="step-note">Listen · choose · keep going</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="section" id="try-a-chapter">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">Try a chapter</p>
+            <h2 class="display">One choice.<br>That's all it takes.</h2>
+            <p class="lede">This is a real branch from <em>Pip and the Lost Firefly</em>. Tap a choice and see how the story bends — and where the lesson hides.</p>
+          </div>
+        </div>
+
+        <div class="demo" data-demo>
+          <div class="demo-story">
+            <div class="demo-meta">
+              <span class="tag tag--yellow">Chapter 1</span>
+              <span class="demo-chapter">Pip and the lost firefly</span>
+            </div>
+            <p class="demo-text" data-demo-text aria-live="polite">Pip finds a tiny firefly tangled in the tall grass. Its light flickers like a nervous star. “I can't find my way home,” it whispers.</p>
+            <div class="demo-lesson" data-demo-lesson hidden>
+              <span>The lesson underneath</span>
+              <span data-demo-lesson-text></span>
+            </div>
+          </div>
+
+          <div class="demo-side">
+            <h3>What does Pip do?</h3>
+            <p>Pick one. There's no wrong answer — that's the point.</p>
+            <div class="demo-choices" data-demo-choices>
+              <button class="demo-btn" type="button" data-demo-choice
+                data-outcome="Pip kneels down and gently untangles the little wings. The firefly zips free, lands on Pip's nose, and lights up the whole garden like a birthday cake."
+                data-lesson="Kindness is a small, bright thing you can hand to someone.">
+                Untangle the wings <span class="choice-arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="demo-btn" type="button" data-demo-choice
+                data-outcome="Pip calls the garden snail, who knows every leaf by name. Together they build a lantern path, and the firefly hums all the way home."
+                data-lesson="Asking for help is its own kind of courage.">
+                Call the snail for help <span class="choice-arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="demo-btn" type="button" data-demo-choice
+                data-outcome="Pip gives the firefly the little night-light from the hallway. “Now I can see my family,” it says. Pip walks home in the dark, and the stars feel friendlier."
+                data-lesson="Sharing what you need makes the whole night softer.">
+                Share the night-light <span class="choice-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+            <button class="btn btn--sm demo-reset" type="button" data-demo-reset hidden>Try another choice ↺</button>
+            <p class="demo-hint">In the app, every choice is spoken aloud too.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grown-ups band -->
+    <section class="band">
+      <div class="wrap band-split">
+        <div>
+          <p class="kicker">For the grown-ups</p>
+          <h2 class="display">Small humans.<br>Big guardrails.</h2>
+          <p class="lede">StorySpark is built to be handed over — not hovered over. Every chapter is checked before your kid hears a word, and every session has a natural end.</p>
+          <a class="btn btn--yellow" href="grown-ups.html">Read the grown-ups guide <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="band-grid">
+          <div class="band-item">
+            <h3>Safety before story</h3>
+            <p>Every chapter passes a child-safety check for kindness, age-fit and scare-factor before it plays. No cliffhangers designed to keep kids hooked.</p>
+          </div>
+          <div class="band-item">
+            <h3>Voice first, reading optional</h3>
+            <p>Pre-readers can play the whole adventure by talking and tapping pictures. Text is there for the grown-ups who want it.</p>
+          </div>
+          <div class="band-item">
+            <h3>A real ending</h3>
+            <p>Adventures run 7–20 minutes and finish with a calm “the end”, a printable drawing and one question to talk about.</p>
+          </div>
+          <div class="band-item">
+            <h3>Private by default</h3>
+            <p>Drawings and recordings belong to your family. No profiles for kids, no ads, no feed, and nothing to scroll.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="wrap">
+        <p class="kicker">Ready when the crayons are</p>
+        <h2 class="display">Tonight's story starts with a crayon.</h2>
+        <p>Grab paper, draw a weird little creature, and let them decide what happens next. You bring the fridge door; we'll bring the adventure.</p>
+        <div class="hero-actions">
+          <a class="btn btn--ink" href="play.html">Start a story <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="how-it-works.html">See how it works</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-about">
+          <a class="brand" href="index.html" aria-label="StorySpark Local — home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.3L21 11l-6.5 2.7L12 20l-2.5-6.3L3 11l6.5-2.7z"/><path d="M19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>
+            </span>
+            <span class="brand-text">StorySpark<span class="brand-local">Local</span></span>
+          </a>
+          <p>A story world where kids draw the hero, say the idea and choose the lesson. Made for ages 4–10.</p>
+          <span class="footer-note">Concept pitch · demo content</span>
+        </div>
+
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="what-it-does.html">What it does</a></li>
+            <li><a href="what-it-does.html#library">Lesson library</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="play.html">Start a story</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Grown-ups</h3>
+          <ul>
+            <li><a href="grown-ups.html">Safety &amp; privacy</a></li>
+            <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
+            <li><a href="grown-ups.html#educators">Educator kit</a></li>
+            <li><a href="grown-ups.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Small print</h3>
+          <ul>
+            <li>Made for ages 4–10</li>
+            <li>No ads. Ever.</li>
+            <li>Powered by Gemini 4</li>
+            <li>Runs on your home setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-word" aria-hidden="true">STORYSPARK</div>
+
+      <div class="footer-bottom">
+        <span>© 2026 StorySpark Local. Made for small humans.</span>
+        <span>Draw boldly. Choose kindly. The end.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
