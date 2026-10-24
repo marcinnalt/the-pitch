@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Cartoon owl">
+  <g stroke="#14110F" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M22 34 L16 18 32 24Z" fill="#7CC7FF"/>
+    <path d="M74 34 L80 18 64 24Z" fill="#7CC7FF"/>
+    <path d="M14 82c-4-24 4-52 34-52s38 28 34 52c-8 8-60 8-68 0Z" fill="#7CC7FF"/>
+    <circle cx="36" cy="48" r="11" fill="#FFFDF3"/>
+    <circle cx="60" cy="48" r="11" fill="#FFFDF3"/>
+    <circle cx="36" cy="48" r="4.5" fill="#14110F" stroke="none"/>
+    <circle cx="60" cy="48" r="4.5" fill="#14110F" stroke="none"/>
+    <path d="M48 54l-6 7h12z" fill="#FFD22E"/>
+    <ellipse cx="48" cy="72" rx="15" ry="10" fill="#FFEAA6" stroke-width="3.5"/>
+    <path d="M20 60q4 12 10 16M76 60q-4 12-10 16" fill="none"/>
+  </g>
+</svg>

@@ -34,6 +34,7 @@
         <ul class="nav-links">
           <li><a href="what-it-does.html">What it does</a></li>
           <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="family.html">Family</a></li>
           <li><a href="grown-ups.html" aria-current="page">Grown-ups</a></li>
         </ul>
         <a class="btn btn--yellow btn--sm" href="play.html">Start a story</a>
@@ -308,6 +309,57 @@
       </div>
     </section>
 
+    <!-- Install -->
+    <section class="section section--milk rule-top" id="install">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-head__copy">
+            <p class="kicker">Run it at home</p>
+            <h2 class="display">Two commands.<br>That's the install.</h2>
+            <p class="lede">The whole front end is static — no build step, no package manager, no account. Python serves it. The local model is optional; without it the studio and quest use their scripted content.</p>
+          </div>
+          <div class="section-head__aside">
+            <span class="tag tag--yellow">Python 3</span>
+          </div>
+        </div>
+
+        <div class="install-grid">
+          <div class="install-step">
+            <span class="install-num" aria-hidden="true">1</span>
+            <h3>Get the files</h3>
+            <p>Clone the repository, or download the ZIP from GitHub and unpack it.</p>
+            <pre class="code-block"><code>git clone https://github.com/marcinnalt/the-pitch.git
+cd the-pitch</code></pre>
+          </div>
+
+          <div class="install-step">
+            <span class="install-num" aria-hidden="true">2</span>
+            <h3>Serve the site</h3>
+            <p>Any static server works. This one is already on your machine.</p>
+            <pre class="code-block"><code>python3 -m http.server 8000</code></pre>
+            <p class="install-note">Open <a href="http://localhost:8000">http://localhost:8000</a>. Profiles, avatars, the bookshelf and the quest work right away.</p>
+          </div>
+
+          <div class="install-step">
+            <span class="install-num" aria-hidden="true">3</span>
+            <h3>Optional: connect a local model</h3>
+            <p>Install Ollama, pull an open-weight model, then run the included FastAPI adapter.</p>
+            <pre class="code-block"><code>python3 -m venv .venv
+source .venv/bin/activate
+pip install -r server/requirements.txt
+ollama pull gemma3:12b
+uvicorn server.app:app --reload --port 8080</code></pre>
+            <p class="install-note">Then set <code>window.STORYSPARK_API = "/api/chapter";</code> in <code>play.html</code> and <code>window.STORYSPARK_QUEST_API = "/api/quest";</code> in <code>game.html</code>.</p>
+          </div>
+        </div>
+
+        <div class="install-foot">
+          <p><strong>No terminal?</strong> The public demo at <a href="https://marcinnalt.github.io/the-pitch/">marcinnalt.github.io/the-pitch</a> runs the full interface with scripted content — no install required.</p>
+          <a class="btn" href="https://github.com/marcinnalt/the-pitch#run-it-in-two-minutes" target="_blank" rel="noopener">Full install notes <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta">
       <div class="wrap">
@@ -347,12 +399,23 @@
         </div>
 
         <div class="footer-col">
+          <h3>Family</h3>
+          <ul>
+            <li><a href="family.html">Kid profiles</a></li>
+            <li><a href="family.html#bookshelf">Knowledge base</a></li>
+            <li><a href="game.html">Play a quest</a></li>
+            <li><a href="play.html">Start a story</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
           <h3>Grown-ups</h3>
           <ul>
             <li><a href="grown-ups.html">Safety &amp; privacy</a></li>
             <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
             <li><a href="grown-ups.html#educators">Educator kit</a></li>
             <li><a href="grown-ups.html#faq">FAQ</a></li>
+            <li><a href="grown-ups.html#install">Install at home</a></li>
           </ul>
         </div>
 

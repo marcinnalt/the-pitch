@@ -20,11 +20,23 @@
 
   const AVATAR_COLORS = ["#FFD22E", "#FF5A36", "#7CC7FF", "#8FE3AE", "#FFEAA6", "#14110F"];
 
+  const AVATARS = [
+    { id: "fox", label: "Fox", src: "assets/avatars/fox.svg" },
+    { id: "frog", label: "Frog", src: "assets/avatars/frog.svg" },
+    { id: "cat", label: "Cat", src: "assets/avatars/cat.svg" },
+    { id: "bear", label: "Bear", src: "assets/avatars/bear.svg" },
+    { id: "bunny", label: "Bunny", src: "assets/avatars/bunny.svg" },
+    { id: "owl", label: "Owl", src: "assets/avatars/owl.svg" },
+    { id: "whale", label: "Whale", src: "assets/avatars/whale.svg" },
+    { id: "monster", label: "Monster", src: "assets/avatars/monster.svg" }
+  ];
+
   const DEFAULT_PROFILE = {
     id: "pip",
     name: "Pip",
     ageBand: "4-6",
     color: "#FFD22E",
+    avatar: "fox",
     language: "en",
     lesson: "kindness",
     stories: 0,
@@ -81,6 +93,7 @@
       name: String(data.name || "New kid").trim().slice(0, 24) || "New kid",
       ageBand: data.ageBand || "4-6",
       color: data.color || AVATAR_COLORS[0],
+      avatar: data.avatar || "fox",
       language: data.language || "en",
       lesson: data.lesson || "kindness",
       stories: 0,
@@ -182,6 +195,7 @@
   window.StorySparkStore = {
     LANGUAGES,
     AVATAR_COLORS,
+    AVATARS,
     getProfiles,
     getActiveProfile,
     setActiveProfile,

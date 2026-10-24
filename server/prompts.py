@@ -21,6 +21,13 @@ LESSONS = {
 
 AGE_BANDS = ("4-6", "5-7", "6-8", "7-10")
 
+LANGUAGES = {
+    "en": "English",
+    "es": "Spanish (Español)",
+    "fr": "French (Français)",
+    "ar": "Arabic (العربية)",
+}
+
 SYSTEM_PROMPT = """You are StorySpark, a warm, playful story companion for children aged 4 to 10.
 You write one short chapter of an interactive story at a time.
 
@@ -52,9 +59,26 @@ Return ONLY valid JSON that matches this shape. No markdown, no commentary:
 }"""
 
 
-def build_user_prompt(name: str, lesson: str, age_band: str, transcript: str, has_image: bool) -> str:
+def build_user_prompt(
+    name: str,
+    lesson: str,
+    age_band: str,
+    transcript: str,
+    has_image: bool,
+    language: str = "en",
+    knowledge: list[str] | None = None,
+) -> str:
     lesson_text = LESSONS.get(lesson, LESSONS["kindness"])
     child_idea = transcript.strip() or "(no spoken idea yet — invent a gentle first beat)"
+    language_name = LANGUAGES.get(language, LANGUAGES["en"])
+    notes = [note.strip() for note in (knowledge or []) if note.strip()][:3]
+    knowledge_block = (
+        "\nFamily notes to honour (use the values and details, never quote them verbatim):\n"
+        + "\n".join(f"- {note[:700]}" for note in notes)
+        + "\n"
+        if notes
+        else ""
+    )
     drawing_note = (
         "The attached image is the child's hand-drawn character. Look at its shape, colour and mood, "
         "and make it the hero. Do not criticise the drawing or ask for a better one."
@@ -67,11 +91,13 @@ def build_user_prompt(name: str, lesson: str, age_band: str, transcript: str, ha
 Hero name: {name}
 Lesson to weave in (do not state it directly): {lesson_text}
 Age band: {age_band}
+Language for the whole chapter: {language_name}
 What the child said: "{child_idea}"
 
 {drawing_note}
-
+{knowledge_block}
 Constraints:
+- Write the title, narration and every choice in {language_name}.
 - Address the hero as {name}.
 - Keep it under 110 words for the narration.
 - End with three choices, each under 6 words, each leading to a safe and kind outcome.
@@ -110,3 +136,67 @@ def build_safety_prompt(chapter: dict) -> str:
     import json
 
     return SAFETY_PROMPT + "\n\nCHAPTER JSON:\n" + json.dumps(chapter, ensure_ascii=False, indent=2)
+
+
+QUEST_PROMPT = """You are StorySpark Quest, a gentle choose-your-path game for children aged 4 to 10.
+
+Build a four-stop kindness quest. Each stop offers three safe, kind choices. There are no wrong
+answers: every choice should lead to a calm, positive outcome and name a small behaviour the child
+practised.
+
+RULES
+1. Safe for a four-year-old: no violence, peril, cruelty, romance, brands, real people or ads.
+2. Short sentences, concrete words, present tense.
+3. No score, no shame, no pressure to continue, no personal-data requests.
+4. Each stop is a small everyday situation a child recognises (a gate, a snack, a new kid, a mess).
+5. Exactly four stops, exactly three choices per stop.
+
+OUTPUT FORMAT — return ONLY valid JSON:
+{
+  "title": "short quest title, max 6 words",
+  "stops": [
+    {
+      "title": "short place or moment, max 4 words",
+      "prompt": "2 sentences setting the scene",
+      "choices": [
+        {"label": "max 6 words, a picturable action", "outcome": "2 sentences, gentle result", "lesson": "one sentence naming the behaviour"},
+        {"label": "...", "outcome": "...", "lesson": "..."},
+        {"label": "...", "outcome": "...", "lesson": "..."}
+      ]
+    }
+  ]
+}"""
+
+
+def build_quest_prompt(
+    name: str,
+    age_band: str,
+    language: str = "en",
+    lesson: str = "kindness",
+    knowledge: list[str] | None = None,
+) -> str:
+    language_name = LANGUAGES.get(language, LANGUAGES["en"])
+    lesson_text = LESSONS.get(lesson, LESSONS["kindness"])
+    notes = [note.strip() for note in (knowledge or []) if note.strip()][:2]
+    knowledge_block = (
+        "\nFamily notes to honour (values and details, never quoted verbatim):\n"
+        + "\n".join(f"- {note[:500]}" for note in notes)
+        + "\n"
+        if notes
+        else ""
+    )
+
+    return f"""Create one StorySpark kindness quest.
+
+Hero name: {name}
+Age band: {age_band}
+Language for every word: {language_name}
+Lesson underneath: {lesson_text}
+{knowledge_block}
+Constraints:
+- Four stops, three choices per stop.
+- Address the hero as {name} at least once.
+- Keep each prompt under 40 words and each outcome under 45 words.
+- End on a complete, calm beat. No cliffhanger.
+
+Return only the JSON object."""

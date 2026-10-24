@@ -20,7 +20,12 @@ from typing import Any
 
 import httpx
 
-from .prompts import SYSTEM_PROMPT, build_safety_prompt, build_user_prompt
+from .prompts import (
+    SYSTEM_PROMPT,
+    build_quest_prompt,
+    build_safety_prompt,
+    build_user_prompt,
+)
 
 ENGINE = os.getenv("STORYSPARK_ENGINE", "ollama").strip().lower()
 MODEL = os.getenv("STORYSPARK_MODEL", "gemma4:12b").strip()
@@ -74,6 +79,74 @@ def extract_json(text: str) -> dict:
         return json.loads(cleaned[start : end + 1])
     except json.JSONDecodeError as exc:
         raise EngineError(f"Model returned invalid JSON: {exc}") from exc
+
+
+def normalise_quest(raw: dict, name: str) -> dict:
+    """Validate a four-stop quest without trusting the model's shape."""
+    if not isinstance(raw, dict):
+        raise EngineError("Quest is not an object")
+
+    title = re.sub(r"\s+", " ", str(raw.get("title") or "A Kindness Quest")).strip()
+    stops = raw.get("stops")
+
+    if not isinstance(stops, list):
+        raise EngineError("Quest has no stops")
+
+    clean_stops: list[dict] = []
+    for stop in stops[:4]:
+        if not isinstance(stop, dict):
+            continue
+
+        prompt = re.sub(
+            r"\s+", " ", str(stop.get("prompt") or stop.get("narration") or "")
+        ).strip()
+        if not prompt:
+            continue
+
+        choices = stop.get("choices")
+        if not isinstance(choices, list):
+            continue
+
+        clean_choices: list[dict] = []
+        for choice in choices[:3]:
+            if not isinstance(choice, dict):
+                continue
+
+            label = re.sub(r"\s+", " ", str(choice.get("label") or "")).strip()
+            outcome = re.sub(
+                r"\s+", " ", str(choice.get("outcome") or choice.get("text") or "")
+            ).strip()
+            lesson = re.sub(r"\s+", " ", str(choice.get("lesson") or "")).strip()
+
+            if label and outcome:
+                clean_choices.append(
+                    {
+                        "label": label[:48],
+                        "outcome": outcome[:500],
+                        "lesson": lesson[:180],
+                    }
+                )
+
+        if len(clean_choices) >= 2:
+            clean_stops.append(
+                {
+                    "title": re.sub(
+                        r"\s+", " ", str(stop.get("title") or "A small stop")
+                    ).strip()[:48],
+                    "prompt": prompt[:500],
+                    "choices": clean_choices,
+                }
+            )
+
+    if len(clean_stops) < 2:
+        raise EngineError("Quest needs at least two usable stops")
+
+    return {
+        "title": title[:80] or f"{name}'s Kindness Quest",
+        "stops": clean_stops,
+        "engine": MODEL,
+        "safety": "checked" if SAFETY_PASS else "unverified",
+    }
 
 
 def normalise_chapter(raw: dict, name: str) -> dict:
@@ -280,12 +353,18 @@ async def generate_chapter(payload: dict) -> dict:
     if image_b64 and media_type not in ("image/png", "image/jpeg", "image/webp"):
         raise EngineError("Drawing must be a PNG, JPEG or WebP data URL")
 
+    language = str(payload.get("language") or "en")[:8]
+    knowledge = payload.get("knowledge") or []
+    knowledge = [str(note)[:900] for note in knowledge[:3] if str(note).strip()]
+
     prompt = build_user_prompt(
         name=name,
         lesson=lesson,
         age_band=age_band,
         transcript=transcript,
         has_image=bool(image_b64),
+        language=language,
+        knowledge=knowledge,
     )
 
     raw = await _complete(prompt, image_b64, drawing)
@@ -319,3 +398,59 @@ async def generate_chapter(payload: dict) -> dict:
 
     reasons = audit.get("reasons") or []
     raise UnsafeChapter("Safety pass rejected the chapter: " + "; ".join(map(str, reasons))[:300])
+
+
+async def generate_quest(payload: dict) -> dict:
+    """Generate a four-stop kindness quest for the active child."""
+    name = str(payload.get("name") or "Pip")[:24]
+    age_band = str(payload.get("age_band") or "4-6")[:8]
+    language = str(payload.get("language") or "en")[:8]
+    lesson = str(payload.get("lesson") or "kindness")[:32]
+    knowledge = payload.get("knowledge") or []
+    knowledge = [str(note)[:900] for note in knowledge[:2] if str(note).strip()]
+
+    prompt = build_quest_prompt(
+        name=name,
+        age_band=age_band,
+        language=language,
+        lesson=lesson,
+        knowledge=knowledge,
+    )
+
+    raw = await _complete(prompt, None, None)
+    quest = normalise_quest(extract_json(raw), name)
+
+    if not SAFETY_PASS:
+        return quest
+
+    audit_prompt = build_safety_prompt(
+        {
+            "title": quest["title"],
+            "narration": quest["stops"][0]["prompt"],
+            "choices": [
+                choice
+                for stop in quest["stops"]
+                for choice in stop["choices"]
+            ],
+        }
+    )
+    audit = extract_json(
+        await _complete(
+            audit_prompt,
+            None,
+            None,
+            system=(
+                "You are a strict child-safety reviewer for games aimed at ages 4 to 10. "
+                "You return only valid JSON."
+            ),
+        )
+    )
+
+    if audit.get("safe") is True:
+        quest["safety"] = "checked"
+        return quest
+
+    reasons = audit.get("reasons") or []
+    raise UnsafeChapter(
+        "Safety pass rejected the quest: " + "; ".join(map(str, reasons))[:300]
+    )

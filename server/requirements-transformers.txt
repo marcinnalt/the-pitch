@@ -1,0 +1,7 @@
+# Optional in-process Hugging Face backend.
+# Install after server/requirements.txt:
+#   pip install -r server/requirements-transformers.txt
+torch>=2.3
+transformers>=4.44
+accelerate>=0.30
+pillow>=10.0

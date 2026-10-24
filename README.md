@@ -1,114 +1,153 @@
 # StorySpark Local
 
-A static, neo-brutalist marketing site and playable studio preview for **StorySpark Local** — a
-kid-first story platform where children aged 4–10 draw a character, say an idea, and choose their
-way through short adventures that quietly teach a lesson.
+StorySpark Local is a story and learning world for kids aged 4–10. A child draws a hero with a
+finger or a mouse, picks a lesson such as kindness, courage or sharing, and gets a short illustrated
+adventure in which their own drawing is the main character. The story pauses at real choices, the
+child decides what happens next, and the ending names the small behaviour they practised — without
+a score, a leaderboard or a wrong answer.
 
-> Draw a friend. Learn a lesson. Play the story.
+It is built for the way families actually live: one tablet, several kids, more than one language.
+Each child can have their own profile, cartoon avatar, age band and story language, while the
+grown-ups keep one shared bookshelf of family stories, values and class topics that the adventures
+can draw on. Kindness quests turn the same idea into a four-stop choose-your-path game. Everything
+runs on the family's own device; there are no ads, no accounts for kids and no cloud profile.
 
-**Status:** concept pitch / front-end prototype. Story content is scripted; the full product would
-run the Gemini 4 story engine with a child-safety pass.
+The project is a working concept pitch: the static site, studio, profiles, knowledge base and
+quest run entirely in the browser, and an optional local backend connects the same interface to an
+open-weight model such as Gemma, Qwen or Llama. This repository contains both.
 
 ---
 
-## Run it
+## Run it in two minutes
 
-No build step, no dependencies. From this folder:
+You need Python 3 (already installed on macOS and most Linux systems) and a browser. There is no
+build step and no `npm install`.
 
 ```bash
+# 1. Get the code
+git clone https://github.com/marcinnalt/the-pitch.git
+cd the-pitch
+
+# 2. Serve it
 python3 -m http.server 8000
-# then open http://localhost:8000
+
+# 3. Open it
+# http://localhost:8000
 ```
 
-Opening `index.html` directly with `file://` also works for the pages, but a local server is
-recommended (it keeps the fonts, canvas export and navigation behaving like production).
+That is the whole front end. The studio, profiles, avatar picker, knowledge base and quest work
+offline in this mode, using scripted story content. Opening `index.html` directly from disk mostly
+works too, but a local server is recommended so navigation, fonts and canvas export behave like
+the deployed site.
+
+### Optional: connect a real local model
+
+The backend is a small FastAPI app. It is optional — without it the site uses its built-in
+scripted chapters and quests.
+
+```bash
+# 1. Install the backend (a virtual environment is recommended)
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r server/requirements.txt
+
+# 2. Install Ollama and pull an open-weight model
+#    https://ollama.com/download
+ollama pull gemma3:12b             # or any vision-capable model you have
+
+# 3. Run the app + API together
+uvicorn server.app:app --reload --port 8080
+# open http://localhost:8080
+```
+
+Then point the front end at the API. In `play.html`, set:
+
+```html
+<script>window.STORYSPARK_API = "/api/chapter";</script>
+```
+
+and in `game.html`, set:
+
+```html
+<script>window.STORYSPARK_QUEST_API = "/api/quest";</script>
+```
+
+Both pages already serve from the same origin when you use `uvicorn`, so no CORS setup is needed.
+
+### Use a different model or server
+
+Copy `.env.example` to `.env` and edit it:
+
+```bash
+cp .env.example .env
+```
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| `STORYSPARK_ENGINE` | `ollama` | `ollama`, `openai` (vLLM, llama.cpp, LM Studio, TGI) or `transformers` |
+| `STORYSPARK_MODEL` | `gemma4:12b` | Any model name the chosen server knows |
+| `OLLAMA_URL` | `http://localhost:11434` | Ollama address |
+| `STORYSPARK_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatible base URL |
+| `STORYSPARK_API_KEY` | `local` | Key for the OpenAI-compatible server |
+| `STORYSPARK_SAFETY_PASS` | `1` | Set to `0` to skip the second safety review |
+
+For the in-process Hugging Face path:
+
+```bash
+pip install -r server/requirements-transformers.txt
+STORYSPARK_ENGINE=transformers STORYSPARK_MODEL=google/gemma-3-12b-it \
+  uvicorn server.app:app --port 8080
+```
 
 ---
 
-## Pages
+## What is in the box
 
-| File | What it's for |
+| Page | What it does |
 | --- | --- |
-| `index.html` | Landing page: hero, lesson preview, how it works, interactive chapter demo, grown-up band, CTA |
-| `what-it-does.html` | The 12-world lesson library with theme + age filters, the learning loop, and lesson mapping |
-| `how-it-works.html` | The four-stage story pipeline, engine features, interruption-friendly design, short spec |
-| `grown-ups.html` | Safety pledge, the "never list", screen-time defaults, educator notes, FAQ |
-| `play.html` | Playable studio: crayon canvas, hero name, lesson picker, branching story preview, PNG colouring-page download |
+| `index.html` | Landing page, lesson preview and an interactive chapter demo |
+| `what-it-does.html` | The twelve-world lesson library, filters and learning loop |
+| `how-it-works.html` | The story pipeline and how a chapter is built |
+| `family.html` | Kid profiles, cartoon avatars, per-kid language and the family knowledge base |
+| `play.html` | The studio: draw a hero, choose a lesson, get a branching chapter, save a colouring page |
+| `game.html` | A four-stop kindness quest with hearts, stars and a reflection screen |
+| `grown-ups.html` | Safety promise, screen-time defaults, educator notes, FAQ and install steps |
 
-Shared UI lives in `assets/css/style.css` and `assets/js/main.js`; the studio logic is in
-`assets/js/play.js`.
+Profiles, the active kid, language choice and knowledge notes are stored in `localStorage` on the
+device. No child data leaves the browser unless a grown-up explicitly connects a local model, in
+which case only the hero name, age band, language, drawing and up to three short knowledge excerpts
+are sent to that model.
 
----
+## Deployment
 
-## The kid-first idea
+The front end is static, so GitHub Pages and Vercel both work with no build command.
 
-The site sells a **learning platform**, not a voice gadget. Voice and vision are how kids use it;
-the lesson is why it exists.
+- **GitHub Pages:** already served at <https://marcinnalt.github.io/the-pitch/>.
+- **Vercel:** import the repository, choose the **Other** preset, leave the build command empty,
+  set the output directory to `.`, and deploy. `vercel.json` adds clean URLs and security headers.
+- **Backend:** host `server/` separately on a machine that can run Python and reach the model
+  (Render, Fly.io, a home server or a GPU box). Vercel cannot run this long-lived FastAPI process.
 
-- **No reading required** — every choice is spoken and pictured.
-- **One decision at a time** — three clear options, no timers, no wrong answers.
-- **A lesson in disguise** — kindness, courage, sharing, honesty, patience, curiosity,
-  empathy, teamwork, persistence, gratitude, fairness, problem-solving.
-- **A real ending** — 7–20 minute adventures with a talk-about-it question and a printable page.
-
-## Design system
-
-Neo-brutalist, built for small hands and big feelings:
-
-- **Palette:** milk `#FFFDF3` + yellow `#FFD22E` + ink `#14110F`, with tomato / sky / mint used
-  only inside illustrations.
-- **Shape:** sharp corners, 3–4px black borders, hard offset shadows, rotated stickers, no pills.
-- **Type:** Archivo Black for display, Space Grotesk for body copy.
-- **Deliberately absent:** online/status indicators, pill cards, rounded corners, dark patterns,
-  fake testimonials, autoplay.
-- **Motion:** a marquee ticker and small scroll reveals, both disabled under
-  `prefers-reduced-motion`.
-- **Accessibility:** skip link, semantic landmarks, visible focus rings, ARIA states on filters
-  and chips, live regions for the story demo, keyboard-operable controls.
-
-## Studio preview
-
-`play.html` is a genuinely interactive front-end demo:
-
-1. Draw with a mouse or finger on the canvas (five crayon colours + eraser + clear).
-2. Pick one of six hero names and six lessons.
-3. "Tell my story" composes a scripted chapter that inserts the hero's name and shows three
-   branching choices with a lesson underneath.
-4. Save the drawing as a printable PNG colouring page.
-
-Each of the six lessons has its own intro and three outcomes. The preview does **not** call a
-model — it is intentionally self-contained so the pitch works offline.
-
-## Project structure
+## Project layout
 
 ```
-storyspark/
-├── index.html
-├── what-it-does.html
-├── how-it-works.html
-├── grown-ups.html
-├── play.html
-├── README.md
-└── assets/
-    ├── css/style.css
-    ├── favicon.svg
-    └── js/
-        ├── main.js   # nav, reveals, home demo, lesson filters
-        └── play.js   # canvas + studio story engine
+the-pitch/
+├── index.html · what-it-does.html · how-it-works.html
+├── family.html · play.html · game.html · grown-ups.html
+├── assets/
+│   ├── css/style.css
+│   ├── avatars/*.svg
+│   └── js/  main.js · store.js · i18n.js · play.js · family.js · game.js
+├── server/  app.py · engine.py · prompts.py · requirements.txt
+├── DESIGN.md        # design system and components
+├── ARCHITECTURE.md  # front end, backend, model integration, safety
+└── vercel.json
 ```
 
-## Roadmap (aligning the front end with the PID)
+## Status
 
-1. **Wire the studio to the real engine** — POST the drawing + transcript to a local Gemini 4
-   endpoint, stream back a chapter object (`title`, `narration`, `choices[]`, `coloringSvg`).
-2. **Voice in / voice out** — Whisper STT and Piper TTS on device; keep the draw-and-tap fallback.
-3. **Safety pass** — run the thinking-mode child-safety review server-side and reject/rewrite
-   before the chapter reaches the client.
-4. **Grown-up session controls** — age band, 5–30 minute timer, wind-down ending, no autoplay.
-5. **Lesson telemetry for grown-ups** — "what they practised" recap, never a child-facing score.
-6. **Printable pack** — SVG colouring page of the child's own character plus a retelling strip.
+Concept pitch and front-end prototype. Story and quest content is scripted by default; the local
+model path is wired but needs a model server to be useful. Copy and lesson content are demo
+material. No real child data is collected by this static site.
 
----
-
-*Concept pitch. Copy and lesson content are demo material; no real child data is collected by
-this static site.*
+*Draw boldly. Choose kindly. The end.*
