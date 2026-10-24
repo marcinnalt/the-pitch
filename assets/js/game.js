@@ -562,4 +562,7 @@
   });
 
   if (startBtn) startBtn.remove();
+
+  /* Exposed for the unit tests and for anyone embedding the deck. */
+  window.StorySparkQuest = { DECK, language: lang };
 })();
