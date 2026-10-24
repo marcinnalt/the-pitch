@@ -315,7 +315,7 @@
         <div class="section-head">
           <div class="section-head__copy">
             <p class="kicker">Run it at home</p>
-            <h2 class="display">Two commands.<br>That's the install.</h2>
+            <h2 class="display">One line.<br>That's the install.</h2>
             <p class="lede">The whole front end is static — no build step, no package manager, no account. Python serves it. The local model is optional; without it the studio and quest use their scripted content.</p>
           </div>
           <div class="section-head__aside">
@@ -326,22 +326,14 @@
         <div class="install-grid">
           <div class="install-step">
             <span class="install-num" aria-hidden="true">1</span>
-            <h3>Get the files</h3>
-            <p>Clone the repository, or download the ZIP from GitHub and unpack it.</p>
-            <pre class="code-block"><code>git clone https://github.com/marcinnalt/the-pitch.git
-cd the-pitch</code></pre>
-          </div>
-
-          <div class="install-step">
-            <span class="install-num" aria-hidden="true">2</span>
-            <h3>Serve the site</h3>
-            <p>Any static server works. This one is already on your machine.</p>
-            <pre class="code-block"><code>python3 -m http.server 8000</code></pre>
+            <h3>Clone and serve in one line</h3>
+            <p>Paste this into a terminal. It fetches the files, enters the folder and starts a local server.</p>
+            <pre class="code-block"><code>git clone https://github.com/marcinnalt/the-pitch.git && cd the-pitch && python3 -m http.server 8000</code></pre>
             <p class="install-note">Open <a href="http://localhost:8000">http://localhost:8000</a>. Profiles, avatars, the bookshelf and the quest work right away.</p>
           </div>
 
           <div class="install-step">
-            <span class="install-num" aria-hidden="true">3</span>
+            <span class="install-num" aria-hidden="true">2</span>
             <h3>Optional: connect a local model</h3>
             <p>Install Ollama, pull an open-weight model, then run the included FastAPI adapter.</p>
             <pre class="code-block"><code>python3 -m venv .venv
@@ -355,7 +347,7 @@ uvicorn server.app:app --reload --port 8080</code></pre>
 
         <div class="install-foot">
           <p><strong>No terminal?</strong> The public demo at <a href="https://marcinnalt.github.io/the-pitch/">marcinnalt.github.io/the-pitch</a> runs the full interface with scripted content — no install required.</p>
-          <a class="btn" href="https://github.com/marcinnalt/the-pitch#run-it-in-two-minutes" target="_blank" rel="noopener">Full install notes <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="https://github.com/marcinnalt/the-pitch#run-it-in-one-line" target="_blank" rel="noopener">Full install notes <span class="btn-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>

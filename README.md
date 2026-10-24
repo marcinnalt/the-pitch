@@ -1,5 +1,7 @@
 # StorySpark Local
 
+**AI for kids — stories, lessons and quests that run on your own device.**
+
 StorySpark Local is a story and learning world for kids aged 4–10. A child draws a hero with a
 finger or a mouse, picks a lesson such as kindness, courage or sharing, and gets a short illustrated
 adventure in which their own drawing is the main character. The story pauses at real choices, the
@@ -18,24 +20,16 @@ open-weight model such as Gemma, Qwen or Llama. This repository contains both.
 
 ---
 
-## Run it in two minutes
+## Run it in one line
 
 You need Python 3 (already installed on macOS and most Linux systems) and a browser. There is no
 build step and no `npm install`.
 
 ```bash
-# 1. Get the code
-git clone https://github.com/marcinnalt/the-pitch.git
-cd the-pitch
-
-# 2. Serve it
-python3 -m http.server 8000
-
-# 3. Open it
-# http://localhost:8000
+git clone https://github.com/marcinnalt/the-pitch.git && cd the-pitch && python3 -m http.server 8000
 ```
 
-That is the whole front end. The studio, profiles, avatar picker, knowledge base and quest work
+Then open **http://localhost:8000**. That is the whole front end. The studio, profiles, avatar picker, knowledge base and quest work
 offline in this mode, using scripted story content. Opening `index.html` directly from disk mostly
 works too, but a local server is recommended so navigation, fonts and canvas export behave like
 the deployed site.
