@@ -86,7 +86,7 @@ def normalise_quest(raw: dict, name: str) -> dict:
     if not isinstance(raw, dict):
         raise EngineError("Quest is not an object")
 
-    title = re.sub(r"\s+", " ", str(raw.get("title") or "A Kindness Quest")).strip()
+    title = re.sub(r"\s+", " ", str(raw.get("title") or "")).strip()
     stops = raw.get("stops")
 
     if not isinstance(stops, list):
@@ -108,7 +108,7 @@ def normalise_quest(raw: dict, name: str) -> dict:
             continue
 
         clean_choices: list[dict] = []
-        for choice in choices[:3]:
+        for choice in choices:
             if not isinstance(choice, dict):
                 continue
 
@@ -126,6 +126,8 @@ def normalise_quest(raw: dict, name: str) -> dict:
                         "lesson": lesson[:180],
                     }
                 )
+
+        clean_choices = clean_choices[:3]
 
         if len(clean_choices) >= 2:
             clean_stops.append(
@@ -154,7 +156,7 @@ def normalise_chapter(raw: dict, name: str) -> dict:
     if not isinstance(raw, dict):
         raise EngineError("Chapter is not an object")
 
-    title = re.sub(r"\s+", " ", str(raw.get("title") or "A StorySpark Adventure")).strip()
+    title = re.sub(r"\s+", " ", str(raw.get("title") or "")).strip()
     narration = re.sub(
         r"\s+", " ", str(raw.get("narration") or raw.get("intro") or "")
     ).strip()
@@ -167,7 +169,7 @@ def normalise_chapter(raw: dict, name: str) -> dict:
         raise EngineError("Chapter has no choices")
 
     clean_choices: list[dict] = []
-    for choice in choices[:3]:
+    for choice in choices:
         if not isinstance(choice, dict):
             continue
         label = re.sub(r"\s+", " ", str(choice.get("label") or "")).strip()
@@ -180,6 +182,8 @@ def normalise_chapter(raw: dict, name: str) -> dict:
             clean_choices.append(
                 {"label": label[:48], "outcome": outcome[:600], "lesson": lesson[:180]}
             )
+
+    clean_choices = clean_choices[:3]
 
     if len(clean_choices) < 2:
         raise EngineError("Chapter needs at least two usable choices")

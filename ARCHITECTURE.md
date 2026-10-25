@@ -152,6 +152,21 @@ The static site itself sends nothing anywhere. When a local model is connected, 
 age band, language, drawing, transcript and up to three short knowledge excerpts are sent to that
 model server.
 
+## PWA and offline
+
+`manifest.webmanifest` declares a standalone app with 192px and 512px PNG icons, shortcuts to the
+studio, quest and family bookshelf, and milk/yellow theme colours. Every page links it and
+`assets/js/pwa.js`.
+
+`pwa.js` registers `sw.js` (the one-liner is `navigator.serviceWorker.register("sw.js")`), captures
+`beforeinstallprompt` for the install button, handles `appinstalled`, and shows iOS-specific
+"Add to Home Screen" guidance when the browser has no prompt API.
+
+`sw.js` precaches the seven pages, shared CSS/JS, avatars, icons and manifest under a versioned
+cache. Navigations are network-first with a cached or `index.html` fallback; static assets are
+cache-first with a background cache update. `/api/` requests are never cached, so model output is
+always live. Bump `VERSION` when the shell changes.
+
 ## Deployment
 
 - **Static:** GitHub Pages at `https://marcinnalt.github.io/the-pitch/`; Vercel via `vercel.json`

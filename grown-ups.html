@@ -6,6 +6,11 @@
   <title>For Grown-ups — StorySpark Local safety, privacy &amp; screen time</title>
   <meta name="description" content="How StorySpark Local keeps kids safe: chapter-level safety checks, no chat, no ads, no kid accounts, local drawings and recordings, and a 20-minute session with a real ending.">
   <meta name="theme-color" content="#FFD22E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="StorySpark">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +40,7 @@
           <li><a href="what-it-does.html">What it does</a></li>
           <li><a href="how-it-works.html">How it works</a></li>
           <li><a href="family.html">Family</a></li>
+          <li><a href="family.html#bookshelf">Bookshelf</a></li>
           <li><a href="grown-ups.html" aria-current="page">Grown-ups</a></li>
         </ul>
         <a class="btn btn--yellow btn--sm" href="play.html">Start a story</a>
@@ -343,6 +349,18 @@ ollama pull gemma3:12b
 uvicorn server.app:app --reload --port 8080</code></pre>
             <p class="install-note">Then set <code>window.STORYSPARK_API = "/api/chapter";</code> in <code>play.html</code> and <code>window.STORYSPARK_QUEST_API = "/api/quest";</code> in <code>game.html</code>.</p>
           </div>
+
+          <div class="install-step install-step--wide" id="install-app">
+            <span class="install-num" aria-hidden="true">3</span>
+            <h3>Install it on a phone — one tap</h3>
+            <p>Open the site on the phone, then tap install. StorySpark is a PWA: it gets a home-screen icon, opens without a browser bar and keeps working with no signal. Registration is one line:</p>
+            <pre class="code-block"><code>navigator.serviceWorker.register("sw.js");</code></pre>
+            <div class="pwa-row">
+              <button class="btn btn--yellow" type="button" data-install-app>Install StorySpark</button>
+              <p class="install-note" data-install-note>After the first visit the app shell is cached and works offline.</p>
+            </div>
+            <p class="install-note">iPhone or iPad: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>. Android / Chrome: use the install button above or the browser menu.</p>
+          </div>
         </div>
 
         <div class="install-foot">
@@ -407,6 +425,7 @@ uvicorn server.app:app --reload --port 8080</code></pre>
             <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
             <li><a href="grown-ups.html#educators">Educator kit</a></li>
             <li><a href="grown-ups.html#faq">FAQ</a></li>
+            <li><a href="grown-ups.html#install">Install app</a></li>
             <li><a href="grown-ups.html#install">Install at home</a></li>
           </ul>
         </div>
@@ -431,6 +450,7 @@ uvicorn server.app:app --reload --port 8080</code></pre>
     </div>
   </footer>
 
+  <script src="assets/js/pwa.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

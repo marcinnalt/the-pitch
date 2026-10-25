@@ -85,7 +85,7 @@ async def chapter(request: ChapterRequest) -> dict:
         raise HTTPException(status_code=413, detail="Drawing is too large")
 
     payload = request.model_dump()
-    payload["knowledge"] = [note[:900] for note in request.knowledge[:3] if note.strip()]
+    payload["knowledge"] = [note.strip()[:900] for note in request.knowledge[:3] if note.strip()]
 
     try:
         return await generate_chapter(payload)
@@ -98,7 +98,7 @@ async def chapter(request: ChapterRequest) -> dict:
 @app.post("/api/quest")
 async def quest(request: QuestRequest) -> dict:
     payload = request.model_dump()
-    payload["knowledge"] = [note[:700] for note in request.knowledge[:2] if note.strip()]
+    payload["knowledge"] = [note.strip()[:700] for note in request.knowledge[:2] if note.strip()]
 
     try:
         return await generate_quest(payload)

@@ -6,6 +6,11 @@
   <title>Start a Story — the StorySpark studio preview</title>
   <meta name="description" content="Draw a character, name them, pick a lesson and make the first choice in the StorySpark Local studio preview.">
   <meta name="theme-color" content="#FFD22E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="StorySpark">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +40,7 @@
           <li><a href="what-it-does.html">What it does</a></li>
           <li><a href="how-it-works.html">How it works</a></li>
           <li><a href="family.html">Family</a></li>
+          <li><a href="family.html#bookshelf">Bookshelf</a></li>
           <li><a href="grown-ups.html">Grown-ups</a></li>
         </ul>
         <a class="btn btn--yellow btn--sm" href="play.html" aria-current="page">Start a story</a>
@@ -152,6 +158,14 @@
             </div>
           </section>
         </div>
+
+        <div class="studio-bookshelf">
+          <div>
+            <strong>Using family notes?</strong>
+            <p>Upload a family story, a class topic or the values you want the adventure to carry. The bookshelf lives on this device and the model only sees a short excerpt.</p>
+          </div>
+          <a class="btn btn--sm" href="family.html#bookshelf">Upload knowledge <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -236,6 +250,7 @@
             <li><a href="grown-ups.html#screen-time">Screen-time promise</a></li>
             <li><a href="grown-ups.html#educators">Educator kit</a></li>
             <li><a href="grown-ups.html#faq">FAQ</a></li>
+            <li><a href="grown-ups.html#install">Install app</a></li>
           </ul>
         </div>
 
@@ -261,6 +276,7 @@
 
   <script src="assets/js/store.js" defer></script>
   <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/pwa.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script>
     /* Point this at a local StorySpark backend to use a real model.

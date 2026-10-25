@@ -40,6 +40,25 @@ offline in this mode, using scripted story content. Opening `index.html` directl
 works too, but a local server is recommended so navigation, fonts and canvas export behave like
 the deployed site.
 
+
+### Install it on a phone — one line of code
+
+StorySpark is a PWA. The service worker is registered with one line:
+
+```js
+navigator.serviceWorker.register("sw.js");
+```
+
+That is already in `assets/js/pwa.js`, loaded by every page. On a phone:
+
+1. Open **https://marcinnalt.github.io/the-pitch/** in Chrome or Safari.
+2. Tap **Install StorySpark** on the [install section](https://marcinnalt.github.io/the-pitch/grown-ups.html#install), or use the browser menu.
+3. iPhone/iPad: **Share → Add to Home Screen**. Android/Chrome: **Install app**.
+
+After the first visit the whole app shell — pages, styles, scripts, avatars and icons — is cached.
+The home-screen app opens without a browser bar and keeps working with no signal. Generated stories
+and quests need the local model, but the scripted studio, profiles, bookshelf and quest work offline.
+
 ### Optional: connect a real local model
 
 The backend is a small FastAPI app. It is optional — without it the site uses its built-in
@@ -118,6 +137,26 @@ device. No child data leaves the browser unless a grown-up explicitly connects a
 which case only the hero name, age band, language, drawing and up to three short knowledge excerpts
 are sent to that model.
 
+
+## Tests
+
+The tests do not need a model server. Browser logic runs on Node's built-in test runner, the backend
+runs on pytest.
+
+```bash
+# Browser logic: storage, i18n, quest deck, PWA shell
+node --test tests/js/*.test.js
+
+# Backend: prompts, output normalisation, safety flow and API routes
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest
+```
+
+The GitHub Actions workflow in `.github/workflows/tests.yml` runs both on every push and pull
+request.
+
 ## Deployment
 
 The front end is static, so GitHub Pages and Vercel both work with no build command.
@@ -139,6 +178,8 @@ the-pitch/
 │   ├── avatars/*.svg
 │   └── js/  main.js · store.js · i18n.js · play.js · family.js · game.js
 ├── server/  app.py · engine.py · prompts.py · requirements.txt
+├── sw.js · manifest.webmanifest · assets/icons/
+├── tests/   js/*.test.js · python/test_*.py
 ├── DESIGN.md        # design system and components
 ├── ARCHITECTURE.md  # front end, backend, model integration, safety
 └── vercel.json
